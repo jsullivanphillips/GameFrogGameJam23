@@ -52,7 +52,20 @@ public class AudioManager : MonoBehaviour
                 music.Add(s);
             }
         }
+        GameState.Singleton.onGamePaused += Pause;
         setupDone = true;
+    }
+
+    void Pause(bool isPaused)
+    {
+        if(isPaused)
+        {
+            PauseAll();
+        }
+        else
+        {
+            ResumeAll();
+        }
     }
 
     bool MusicIsPlaying()

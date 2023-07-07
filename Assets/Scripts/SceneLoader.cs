@@ -36,7 +36,7 @@ public class SceneLoader : MonoBehaviour
         // audioManager.StopAll();
         // We can stop all music on scene change if we like
         _Animator.SetTrigger("FadeOut");
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(sceneName);
     }
 }
