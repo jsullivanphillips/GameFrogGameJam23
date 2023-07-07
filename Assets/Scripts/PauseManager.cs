@@ -6,7 +6,6 @@ public class PauseManager : MonoBehaviour
 {
     [SerializeField] GameObject _PauseCanvas;
     
-
     void Start()
     {
         GameState.Singleton.onGamePaused += OnPause;
@@ -22,5 +21,13 @@ public class PauseManager : MonoBehaviour
         {
             _PauseCanvas.SetActive(false);
         }
+    }
+
+    public void OnBackToMenu()
+    {
+        GameState.Singleton.onGamePaused -= OnPause;
+        GameState.Singleton.SetPause(false);
+        SceneLoader.Singleton.LoadScene("Menu");
+
     }
 }

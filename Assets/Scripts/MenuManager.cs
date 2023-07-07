@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
-    void Start()
-    {
-        AudioManager.Singleton.Play("Theme");
-    }
 
     public void OnStartGame()
     {

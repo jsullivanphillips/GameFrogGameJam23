@@ -33,4 +33,11 @@ public class GameState : MonoBehaviour
                 onGamePaused(IsPaused);
         }
     }
+
+    public void SetPause(bool paused)
+    {
+        IsPaused = paused;
+        if (onGamePaused != null)
+            onGamePaused(IsPaused);
+    }
 }
