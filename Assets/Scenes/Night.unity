@@ -6153,7 +6153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1b3721105087124e9963ba3ede78fe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpSlider: {fileID: 0}
+  hpSlider: {fileID: 177013523}
 --- !u!114 &8894556911101446130
 MonoBehaviour:
   m_ObjectHideFlags: 0
