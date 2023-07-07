@@ -38,7 +38,7 @@ public class SpawnManager : MonoBehaviour
         _NumPeasantsToSpawn = GameState.Singleton.numPeasantsToSpawn;
         Debug.Log($"_NumPeasantsToSpawn = {_NumPeasantsToSpawn}");
         PopulatePools();
-        SpawnMobs();
+        StartCoroutine(SpawnMobs());
     }
 
     private void PopulatePools()
@@ -51,7 +51,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    public void SpawnMobs()
+    public IEnumerator SpawnMobs()
     {
         List<GameObject> tempList = new List<GameObject>();
         tempList.AddRange(_InactivePeasantPool);
@@ -63,6 +63,7 @@ public class SpawnManager : MonoBehaviour
             _InactivePeasantPool.Remove(tempList[i]);
             _NumPeasantsSpawned++;
             _NumAlivePeasants++;
+            yield return new WaitForSeconds(0.5f);
         }
     }
 
@@ -99,7 +100,7 @@ public class SpawnManager : MonoBehaviour
         _NumAlivePeasants--;
         if(_NumPeasantsSpawned < _NumPeasantsToSpawn)
         {
-            SpawnMobs();
+            StartCoroutine(SpawnMobs());
         }
     }
 }
