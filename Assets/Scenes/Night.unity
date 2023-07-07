@@ -553,6 +553,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e63384f4a2a8d45409d2df245a8b749d, type: 3}
+--- !u!1 &173441585 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6033952781799454322, guid: 1e1fb4f1f2d2c2e45a3893956b67d047, type: 3}
+  m_PrefabInstance: {fileID: 738694886}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &182818291
 GameObject:
   m_ObjectHideFlags: 0
@@ -1516,6 +1521,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -104882570301109053, guid: 1e1fb4f1f2d2c2e45a3893956b67d047, type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1272522864781507800, guid: 1e1fb4f1f2d2c2e45a3893956b67d047, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1587,6 +1596,21 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8369053493480075271, guid: 1e1fb4f1f2d2c2e45a3893956b67d047, type: 3}
   m_PrefabInstance: {fileID: 738694886}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &738694888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173441585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f673a56e3963b54ab90ccf8113c8d2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slashPoint: {fileID: 799172646}
+  swordPrefab: {fileID: 6628903360930603266, guid: 182bce54533a4844f8c8e4833a4167b8, type: 3}
+  slashForce: 20
 --- !u!1001 &748244711
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1718,6 +1742,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3142561611198845101, guid: e63384f4a2a8d45409d2df245a8b749d, type: 3}
   m_PrefabInstance: {fileID: 1119035069}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &799172645
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 799172646}
+  m_Layer: 0
+  m_Name: SlashPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &799172646
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799172645}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.01, y: 1.22, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 738694887}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &803761273 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3142561611198845101, guid: e63384f4a2a8d45409d2df245a8b749d, type: 3}
