@@ -6,7 +6,7 @@ public class PlayerInfo : MonoBehaviour
 {
     public static PlayerInfo Singleton { get; private set; }
 
-    public int blood;
+    public int blood = 0;
 
     public int damage;
 

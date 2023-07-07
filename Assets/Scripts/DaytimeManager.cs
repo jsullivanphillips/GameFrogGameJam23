@@ -7,12 +7,14 @@ using TMPro;
 public class DaytimeManager : MonoBehaviour
 {
     [SerializeField] TMP_Text numPeasantsConvincedText;
+    [SerializeField] TMP_Text bloodText;
     private int numPeasants;
     // Start is called before the first frame update
     void Start()
     {
-        numPeasants = 0;
+        numPeasants = 5;
         numPeasantsConvincedText.text = "Num Peasants convinced to hunt : 0";
+        bloodText.text = PlayerInfo.Singleton.blood.ToString();
     }
 
     public void OnRaiseUnrest()

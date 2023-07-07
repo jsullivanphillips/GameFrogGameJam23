@@ -18,6 +18,8 @@ public class SpawnManager : MonoBehaviour
 
     [SerializeField] GameObject _PeasantPrefab;
     private int _NumPeasantsToSpawn = 0;
+    private int _NumPeasantsSpawned = 0;
+    private int _NumAlivePeasants = 0;
     private List<GameObject> _InactivePeasantPool = new List<GameObject>();
     private List<GameObject> _ActivePeasantPool = new List<GameObject>();
 
@@ -53,12 +55,15 @@ public class SpawnManager : MonoBehaviour
     {
         List<GameObject> tempList = new List<GameObject>();
         tempList.AddRange(_InactivePeasantPool);
-        for (int i = 0; i < tempList.Count && i < _NumPeasantsToSpawn; i++)
+        for (int i = 0; (i < tempList.Count) && (_NumPeasantsSpawned < _NumPeasantsToSpawn) && (_NumAlivePeasants < MAXPOOLSIZE); i++)
         {
             tempList[i].SetActive(true);
             tempList[i].transform.position = RandomSpawnLocation();
             _ActivePeasantPool.Add(tempList[i]);
             _InactivePeasantPool.Remove(tempList[i]);
+            _NumPeasantsSpawned++;
+            _NumAlivePeasants++;
+            Debug.Log("Peasant spawned");
         }
     }
 
@@ -87,33 +92,15 @@ public class SpawnManager : MonoBehaviour
         return _SpawnTOPLEFT.position;
     }
 
-    public void SpawnUnit(UnitType unitType, SpawnLocation spawnLocation)
+    public void PeasantHasDied(GameObject peasant)
     {
-
-        /*
-        switch (spawnLocation)
+        peasant.SetActive(false);
+        _ActivePeasantPool.Remove(peasant);
+        _InactivePeasantPool.Add(peasant);
+        _NumAlivePeasants--;
+        if(_NumPeasantsSpawned < _NumPeasantsToSpawn)
         {
-            case (SpawnLocation.TOPLEFT):
-                {
-                    spawnVector = _SpawnTOPLEFT.position;
-                    break;
-                }
-            case (SpawnLocation.TOPRIGHT):
-                {
-                    spawnVector = _SpawnTOPRIGHT.position;
-                    break;
-                }
-            case (SpawnLocation.BOTTOMLEFT):
-                {
-                    spawnVector = _SpawnBOTTOMLEFT.position;
-                    break;
-                }
-            case (SpawnLocation.BOTTOMRIGHT):
-                {
-                    spawnVector = _SpawnBOTTOMRIGHT.position;
-                    break;
-                }
+            SpawnMobs();
         }
-        */
     }
 }
