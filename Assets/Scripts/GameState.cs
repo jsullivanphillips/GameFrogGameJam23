@@ -11,6 +11,9 @@ public class GameState : MonoBehaviour
     public delegate void OnGamePaused(bool paused);
     public event OnGamePaused onGamePaused;
 
+    public int numPeasantsToSpawn;
+
+
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);

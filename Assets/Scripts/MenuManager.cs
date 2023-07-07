@@ -7,8 +7,7 @@ public class MenuManager : MonoBehaviour
 
     public void OnStartGame()
     {
-        
-        SceneLoader.Singleton.LoadScene("Game");
+        SceneLoader.Singleton.LoadScene("Day");
     }
 
     public void OnQuit()
