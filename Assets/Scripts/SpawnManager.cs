@@ -33,7 +33,8 @@ public class SpawnManager : MonoBehaviour
         {
             Singleton = this;
         }
-        _NumPeasantsToSpawn = 15;
+        _NumPeasantsToSpawn = GameState.Singleton.numPeasantsToSpawn;
+        Debug.Log($"_NumPeasantsToSpawn = {_NumPeasantsToSpawn}");
         PopulatePools();
         SpawnMobs();
     }

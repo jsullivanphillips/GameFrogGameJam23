@@ -16,8 +16,6 @@ public class Peasant : MonoBehaviour
     void Start()
     {
         _Werewolf = GameObject.Find("Werewolf Mayor");
-        if (_Werewolf != null)
-            Debug.Log("found him!");
     }
 
     public void TakeDamage(int amount)
