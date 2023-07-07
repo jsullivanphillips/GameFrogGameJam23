@@ -9,12 +9,9 @@ public class SceneLoader : MonoBehaviour
     public static SceneLoader Singleton { get; private set; }
 
     private Animator _Animator;
-    private string _CurrentSceneName;
-    private string _PreviousSceneName;
 
     void Awake()
     {
-        DontDestroyOnLoad(this);
         if (Singleton != null && Singleton != this)
         {
             Destroy(this.gameObject);
@@ -26,18 +23,20 @@ public class SceneLoader : MonoBehaviour
         _Animator = GetComponent<Animator>();
     }
 
+
+
     public void LoadScene(string sceneName)
     {
-        _PreviousSceneName = _CurrentSceneName;
-        _CurrentSceneName = sceneName;
-        FadeOut();
+        StartCoroutine(FadeOut(sceneName));
     }
 
-    private void FadeOut()
+    private IEnumerator FadeOut(string sceneName)
     {
         // AudioManager audioManager = FindObjectOfType<AudioManager>();
         // audioManager.StopAll();
         // We can stop all music on scene change if we like
         _Animator.SetTrigger("FadeOut");
+        yield return new WaitForSeconds(0.3f);
+        SceneManager.LoadScene(sceneName);
     }
 }
