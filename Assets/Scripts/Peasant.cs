@@ -7,6 +7,9 @@ public class Peasant : MonoBehaviour
     private Vector3 _WerewolfLocation;
     private GameObject _Werewolf;
 
+    private int hp = 10;
+    public bool isDead;
+
     [SerializeField] float speed = 5f;
     private Vector2 target;
 
@@ -16,9 +19,14 @@ public class Peasant : MonoBehaviour
         if (_Werewolf != null)
             Debug.Log("found him!");
     }
-    // Find location of werewolf
 
-    // move towards werewolf
+    public void TakeDamage(int amount)
+    {
+        hp -= amount;
+        if (hp < 0)
+            isDead = true;
+    }
+
 
     void Update()
     {

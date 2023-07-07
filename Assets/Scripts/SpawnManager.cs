@@ -8,13 +8,20 @@ public enum SpawnLocation { TOPLEFT, TOPRIGHT, BOTTOMLEFT, BOTTOMRIGHT}
 public class SpawnManager : MonoBehaviour
 {
     public static SpawnManager Singleton { get; private set; }
-    public const int NUMPEASANTSTOPOOL = 20;
+    public const int MAXPOOLSIZE = 20;
     [SerializeField] Transform _SpawnTOPLEFT;
     [SerializeField] Transform _SpawnTOPRIGHT;
     [SerializeField] Transform _SpawnBOTTOMLEFT;
     [SerializeField] Transform _SpawnBOTTOMRIGHT;
-    [SerializeField] GameObject PeasantPrefab;
-    private List<GameObject> _PeasantPool = new List<GameObject>();
+
+
+
+    [SerializeField] GameObject _PeasantPrefab;
+    private int _NumPeasantsToSpawn = 0;
+    private List<GameObject> _InactivePeasantPool = new List<GameObject>();
+    private List<GameObject> _ActivePeasantPool = new List<GameObject>();
+
+
 
     void Awake()
     {
@@ -26,32 +33,64 @@ public class SpawnManager : MonoBehaviour
         {
             Singleton = this;
         }
-        StartCoroutine(SpawnUnits());
+        _NumPeasantsToSpawn = 15;
+        PopulatePools();
+        SpawnMobs();
     }
 
-    IEnumerator SpawnUnits()
+    private void PopulatePools()
     {
-        for (int i = 0; i < NUMPEASANTSTOPOOL; i++)
+        for(int i = 0; i < MAXPOOLSIZE; i++)
         {
-            SpawnUnit(UnitType.PEASANT, SpawnLocation.TOPLEFT);
-            yield return new WaitForSeconds(0.1f);
+            GameObject peasant = Instantiate(_PeasantPrefab, Vector3.zero, Quaternion.identity);
+            peasant.SetActive(false);
+            _InactivePeasantPool.Add(peasant);
         }
+    }
+
+    public void SpawnMobs()
+    {
+        List<GameObject> tempList = new List<GameObject>();
+        tempList.AddRange(_InactivePeasantPool);
+        for (int i = 0; i < tempList.Count && i < _NumPeasantsToSpawn; i++)
+        {
+            tempList[i].SetActive(true);
+            tempList[i].transform.position = RandomSpawnLocation();
+            _ActivePeasantPool.Add(tempList[i]);
+            _InactivePeasantPool.Remove(tempList[i]);
+        }
+    }
+
+    private Vector3 RandomSpawnLocation()
+    {
+        int location = Random.Range(0, 4);
+        switch(location)
+        {
+            case 0:
+                {
+                    return _SpawnTOPLEFT.position;
+                }
+            case 1:
+                {
+                    return _SpawnTOPRIGHT.position;
+                }
+            case 2:
+                {
+                    return _SpawnBOTTOMLEFT.position;
+                }
+            case 3:
+                {
+                    return _SpawnBOTTOMRIGHT.position;
+                }
+        }
+        return _SpawnTOPLEFT.position;
     }
 
     public void SpawnUnit(UnitType unitType, SpawnLocation spawnLocation)
     {
-        GameObject unitToSpawn = PeasantPrefab;
-        Vector3 spawnVector = _SpawnTOPLEFT.position;
-        switch(unitType)
-        {
-            case (UnitType.PEASANT):
-                {
-                    unitToSpawn = PeasantPrefab;
-                    break;
-                }
-        }
 
-        switch(spawnLocation)
+        /*
+        switch (spawnLocation)
         {
             case (SpawnLocation.TOPLEFT):
                 {
@@ -74,8 +113,6 @@ public class SpawnManager : MonoBehaviour
                     break;
                 }
         }
-
-        Instantiate(unitToSpawn, spawnVector, Quaternion.identity);
-
+        */
     }
 }

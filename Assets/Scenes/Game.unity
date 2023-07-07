@@ -937,7 +937,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1001,7 +1001,7 @@ MonoBehaviour:
   _SpawnTOPRIGHT: {fileID: 1225609096}
   _SpawnBOTTOMLEFT: {fileID: 1104528404}
   _SpawnBOTTOMRIGHT: {fileID: 2101570908}
-  PeasantPrefab: {fileID: 1464823351458939661, guid: 6fad4aeeff29f104289c393404caafe9, type: 3}
+  _PeasantPrefab: {fileID: 1464823351458939661, guid: 6fad4aeeff29f104289c393404caafe9, type: 3}
 --- !u!4 &1603303638
 Transform:
   m_ObjectHideFlags: 0
