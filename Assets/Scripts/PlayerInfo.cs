@@ -6,15 +6,15 @@ public class PlayerInfo : MonoBehaviour
 {
     public static PlayerInfo Singleton { get; private set; }
 
+    public int hp = 50;
+
     public int blood = 0;
 
-    public int damage;
+    public int damage = 1;
 
-    public int meleeAttackRange;
+    public int range = 2;
 
-    public int rangedAttackRange;
-
-    public float lifesteal;
+    public float lifesteal = 0;
 
     void Awake()
     {
