@@ -24,7 +24,7 @@ public class SceneLoader : MonoBehaviour
     }
 
 
-
+    // To use call SceneLoader.Singleton.LoadScene("<SceneName>");
     public void LoadScene(string sceneName)
     {
         StartCoroutine(FadeOut(sceneName));
