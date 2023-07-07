@@ -9,10 +9,10 @@ public class SpawnManager : MonoBehaviour
 {
     public static SpawnManager Singleton { get; private set; }
     public const int NUMPEASANTSTOPOOL = 20;
-    [SerializeField] Vector3 _SpawnTOPLEFT;
-    [SerializeField] Vector3 _SpawnTOPRIGHT;
-    [SerializeField] Vector3 _SpawnBOTTOMLEFT;
-    [SerializeField] Vector3 _SpawnBOTTOMRIGHT;
+    [SerializeField] Transform _SpawnTOPLEFT;
+    [SerializeField] Transform _SpawnTOPRIGHT;
+    [SerializeField] Transform _SpawnBOTTOMLEFT;
+    [SerializeField] Transform _SpawnBOTTOMRIGHT;
     [SerializeField] GameObject PeasantPrefab;
     private List<GameObject> _PeasantPool = new List<GameObject>();
 
@@ -26,12 +26,22 @@ public class SpawnManager : MonoBehaviour
         {
             Singleton = this;
         }
+        StartCoroutine(SpawnUnits());
+    }
+
+    IEnumerator SpawnUnits()
+    {
+        for (int i = 0; i < NUMPEASANTSTOPOOL; i++)
+        {
+            SpawnUnit(UnitType.PEASANT, SpawnLocation.TOPLEFT);
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 
     public void SpawnUnit(UnitType unitType, SpawnLocation spawnLocation)
     {
-        GameObject unitToSpawn;
-        Vector3 spawnLocation;
+        GameObject unitToSpawn = PeasantPrefab;
+        Vector3 spawnVector = _SpawnTOPLEFT.position;
         switch(unitType)
         {
             case (UnitType.PEASANT):
@@ -45,25 +55,27 @@ public class SpawnManager : MonoBehaviour
         {
             case (SpawnLocation.TOPLEFT):
                 {
-                    spawnLocation = _SpawnTOPLEFT;
+                    spawnVector = _SpawnTOPLEFT.position;
                     break;
                 }
             case (SpawnLocation.TOPRIGHT):
                 {
-                    spawnLocation = _SpawnTOPRIGHT;
+                    spawnVector = _SpawnTOPRIGHT.position;
                     break;
                 }
             case (SpawnLocation.BOTTOMLEFT):
                 {
-                    spawnLocation = _SpawnBOTTOMLEFT;
+                    spawnVector = _SpawnBOTTOMLEFT.position;
                     break;
                 }
             case (SpawnLocation.BOTTOMRIGHT):
                 {
-                    spawnLocation = _SpawnBOTTOMRIGHT;
+                    spawnVector = _SpawnBOTTOMRIGHT.position;
                     break;
                 }
         }
+
+        Instantiate(unitToSpawn, spawnVector, Quaternion.identity);
 
     }
 }
