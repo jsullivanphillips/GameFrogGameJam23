@@ -304,6 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5de4c8895d4d86489b9f83a104c302f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _PauseCanvas: {fileID: 1375745770}
 --- !u!4 &675151411
 Transform:
   m_ObjectHideFlags: 0

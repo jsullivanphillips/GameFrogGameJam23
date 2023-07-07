@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class PauseManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] GameObject _PauseCanvas;
+    
+
     void Start()
     {
-        
+        GameState.Singleton.onGamePaused += OnPause;
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnPause(bool isPaused)
     {
-        
+        if (isPaused)
+        {
+            _PauseCanvas.SetActive(true);
+        }
+        else
+        {
+            _PauseCanvas.SetActive(false);
+        }
     }
 }
