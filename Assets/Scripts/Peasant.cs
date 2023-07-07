@@ -29,6 +29,12 @@ public class Peasant : MonoBehaviour
     }
 
 
+    public void SetHp(int amount)
+    {
+        hp = amount;
+    }
+
+
     void Update()
     {
         // make follow only within radiues, otherwise pick random point on map and head to it. need to create groups of peasants.

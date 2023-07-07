@@ -59,6 +59,7 @@ public class SpawnManager : MonoBehaviour
         {
             tempList[i].SetActive(true);
             tempList[i].transform.position = RandomSpawnLocation();
+            tempList[i].GetComponent<Peasant>().SetHp(10);
             _ActivePeasantPool.Add(tempList[i]);
             _InactivePeasantPool.Remove(tempList[i]);
             _NumPeasantsSpawned++;
