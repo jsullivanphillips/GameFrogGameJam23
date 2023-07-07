@@ -10,7 +10,8 @@ public class Peasant : MonoBehaviour
     private int hp = 10;
 
     [SerializeField] float speed = 5f;
-    private Vector2 target;
+    private Vector3 target;
+    int damping = 2;
 
     void Start()
     {
@@ -31,14 +32,27 @@ public class Peasant : MonoBehaviour
     void Update()
     {
         // make follow only within radiues, otherwise pick random point on map and head to it. need to create groups of peasants.
-        float step = speed * Time.deltaTime;
-        target = _Werewolf.transform.position;
-        transform.position = Vector2.MoveTowards(transform.position, target, step);
+
+        LookAndMoveTowardsWerewolf();
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             int damage = Random.Range(1, 3);
             TakeDamage(damage);
         }
+    }
+
+    void LookAndMoveTowardsWerewolf()
+    {
+        float step = speed * Time.deltaTime;
+        target = _Werewolf.transform.position;
+        transform.position = Vector3.MoveTowards(transform.position, target, step);
+
+        Vector3 lookPos = target - transform.position;
+        var rotation = Quaternion.LookRotation(lookPos);
+        rotation.y = 0;
+        rotation.x = 0;
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * damping);
     }
 
 }

@@ -63,7 +63,6 @@ public class SpawnManager : MonoBehaviour
             _InactivePeasantPool.Remove(tempList[i]);
             _NumPeasantsSpawned++;
             _NumAlivePeasants++;
-            Debug.Log("Peasant spawned");
         }
     }
 
