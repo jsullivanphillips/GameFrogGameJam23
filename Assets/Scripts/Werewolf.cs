@@ -16,13 +16,4 @@ public class Werewolf : MonoBehaviour
         _WerewolfUI.SetupHealthBar(hp);
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            hp -= 5;
-            if (onHpChanged != null)
-                onHpChanged(hp);
-        }
-    }
 }

@@ -35,11 +35,6 @@ public class Peasant : MonoBehaviour
 
         LookAndMoveTowardsWerewolf();
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            int damage = Random.Range(1, 3);
-            TakeDamage(damage);
-        }
     }
 
     void LookAndMoveTowardsWerewolf()
