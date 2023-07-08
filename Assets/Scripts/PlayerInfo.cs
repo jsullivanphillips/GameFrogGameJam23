@@ -8,7 +8,7 @@ public class PlayerInfo : MonoBehaviour
 
     public int hp = 50;
 
-    public int blood = 0;
+    public int blood = 10;
 
     public int damage = 1;
 

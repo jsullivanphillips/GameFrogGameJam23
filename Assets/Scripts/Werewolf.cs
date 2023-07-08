@@ -4,16 +4,37 @@ using UnityEngine;
 
 public class Werewolf : MonoBehaviour
 {
-    private int hp = 100;
-
     [SerializeField] WerewolfUI _WerewolfUI;
-
+    
     public delegate void OnHpChanged(int hp);
     public static event OnHpChanged onHpChanged;
 
+    private int hp;
+
     void Start()
     {
-        _WerewolfUI.SetupHealthBar(hp);
+        PlayerCombat playerCombat = this.gameObject.GetComponent<PlayerCombat>();
+        playerCombat.SetDamage(PlayerInfo.Singleton.damage);
+        playerCombat.SetRange(PlayerInfo.Singleton.range);
+        _WerewolfUI.SetupHealthBar(PlayerInfo.Singleton.hp);
+        hp = PlayerInfo.Singleton.hp;
     }
+
+    public void TakeDamage(int amount)
+    {
+        // hit animation
+        hp -= amount;
+        if(hp <= 0)
+        {
+            SceneLoader.Singleton.LoadScene("Menu");
+            //get wrekt lmao
+        }
+        else if(onHpChanged != null)
+        {
+            onHpChanged(hp);
+        }
+    }
+
+
 
 }

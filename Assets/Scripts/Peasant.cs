@@ -7,9 +7,11 @@ public class Peasant : MonoBehaviour
     private Vector3 _WerewolfLocation;
     private GameObject _Werewolf;
 
-    private int hp = 10;
+    [SerializeField] SpriteRenderer sr1;
+    [SerializeField] SpriteRenderer sr2;
+    
 
-    [SerializeField] float speed = 5f;
+
     [SerializeField] Animator _Animator;
     Rigidbody2D rb;
     private Vector3 target;
@@ -19,6 +21,14 @@ public class Peasant : MonoBehaviour
 
     [SerializeField] float attackRate;
     float nextAttackTime = 0;
+
+    float speed = 5f;
+    [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float attackMoveSpeed = 1f;
+    [SerializeField] float approachMoveSpeed = 3f;
+    [SerializeField] int damage;
+    [SerializeField] int hp = 10;
+
 
     void Start()
     {
@@ -36,6 +46,7 @@ public class Peasant : MonoBehaviour
         {
             SpawnManager.Singleton.PeasantHasDied(this.gameObject);
             PlayerInfo.Singleton.blood += blood;
+            NightManager.Singleton.UpdateBloodCount(PlayerInfo.Singleton.blood);
         }
         else
         {
@@ -45,8 +56,12 @@ public class Peasant : MonoBehaviour
 
     private IEnumerator CanMoveWait()
     {
+        sr1.color = Color.red;
+        sr2.color = Color.red;
         canMove = false;
         yield return new WaitForSeconds(0.25f);
+        sr1.color = Color.white;
+        sr2.color = Color.white;
         canMove = true;
     }
 
@@ -103,6 +118,15 @@ public class Peasant : MonoBehaviour
         
     }
 
+    IEnumerator WaitForAttackAnimation()
+    {
+        yield return new WaitForSeconds(1f);
+        // do attack logic
+        // _Werewolf.GetComponent<Werewolf>().TakeDamage(damage);
+        // play hooray sound effecT?
+        // i.e. AudioManager.Singleton.Play("Hooray");
+    }
+
     void LookAndMoveTowardsWerewolf()
     {
         if(canMove)
@@ -118,10 +142,11 @@ public class Peasant : MonoBehaviour
             // if close, attack
             else if (delta.magnitude < 4f)
             {
-                speed = 1f;
+                speed = attackMoveSpeed;
                 if (Time.time >= nextAttackTime)
                 {
                     _Animator.SetTrigger("Attacking");
+                    StartCoroutine(WaitForAttackAnimation());
                     nextAttackTime = Time.time + 1f / attackRate;
                 }
                     
@@ -129,12 +154,12 @@ public class Peasant : MonoBehaviour
             // if pretty close slowdown
             else if (delta.magnitude < 20)
             {
-                speed = 3f;
+                speed = approachMoveSpeed;
             }
             // else just go a normal pace
             else
             {
-                speed = 5f;
+                speed = moveSpeed;
             }
 
 

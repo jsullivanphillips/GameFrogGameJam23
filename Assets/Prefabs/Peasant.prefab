@@ -49,9 +49,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59b398de10f53e843b17708f57817a87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  sr1: {fileID: 4037376236796068306}
+  sr2: {fileID: 1956952299417040411}
   _Animator: {fileID: 2267728192038652448}
   attackRate: 0.6
+  moveSpeed: 5
+  attackMoveSpeed: 1
+  approachMoveSpeed: 3
+  damage: 2
+  hp: 10
 --- !u!50 &-1332205448272680893
 Rigidbody2D:
   serializedVersion: 4
@@ -309,6 +315,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 4843985084834002234, guid: fecd53bfba25a0843941d358e2ea68eb, type: 3}
+--- !u!212 &1956952299417040411 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7363645826101818240, guid: fecd53bfba25a0843941d358e2ea68eb, type: 3}
+  m_PrefabInstance: {fileID: 9014114505041692059}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &4037376236796068306 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4980758166584263753, guid: fecd53bfba25a0843941d358e2ea68eb, type: 3}
+  m_PrefabInstance: {fileID: 9014114505041692059}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7653664608902790213 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7552582706839291426, guid: fecd53bfba25a0843941d358e2ea68eb, type: 3}

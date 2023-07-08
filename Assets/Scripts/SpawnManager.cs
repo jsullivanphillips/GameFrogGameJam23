@@ -8,7 +8,7 @@ public enum SpawnLocation { TOPLEFT, TOPRIGHT, BOTTOMLEFT, BOTTOMRIGHT}
 public class SpawnManager : MonoBehaviour
 {
     public static SpawnManager Singleton { get; private set; }
-    public const int MAXPOOLSIZE = 20;
+    public const int MAXPOOLSIZE = 40;
     [SerializeField] Transform _SpawnTOPLEFT;
     [SerializeField] Transform _SpawnTOPRIGHT;
     [SerializeField] Transform _SpawnBOTTOMLEFT;
@@ -35,10 +35,13 @@ public class SpawnManager : MonoBehaviour
         {
             Singleton = this;
         }
-        _NumPeasantsToSpawn = GameState.Singleton.numPeasantsToSpawn;
-        Debug.Log($"_NumPeasantsToSpawn = {_NumPeasantsToSpawn}");
-        PopulatePools();
-        StartCoroutine(SpawnMobs());
+        if(GameState.Singleton != null)
+        {
+            _NumPeasantsToSpawn = GameState.Singleton.numPeasantsToSpawn;
+            Debug.Log($"_NumPeasantsToSpawn = {_NumPeasantsToSpawn}");
+            PopulatePools();
+            StartCoroutine(SpawnMobs());
+        }
     }
 
     private void PopulatePools()

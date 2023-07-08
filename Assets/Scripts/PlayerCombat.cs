@@ -26,6 +26,16 @@ public class PlayerCombat : MonoBehaviour
         }       
     }
 
+    public void SetDamage(int amount)
+    {
+        damage = amount;
+    }
+
+    public void SetRange(float amount)
+    {
+        attackRange = amount;
+    }
+
     void Attack()
     {
         anim.SetTrigger("Attacking");
