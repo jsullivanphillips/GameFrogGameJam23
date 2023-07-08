@@ -18,6 +18,9 @@ public class Peasant : MonoBehaviour
     private bool canMove = true;
     private int blood = 1;
 
+    [SerializeField] float attackRate;
+    float nextAttackTime = 0;
+
     void Start()
     {
         rb = this.gameObject.GetComponent<Rigidbody2D>();
@@ -84,9 +87,9 @@ public class Peasant : MonoBehaviour
                 float x = Random.Range(-100f, 100f);
                 float y = Random.Range(-100f, 100f);
                 randomPosition = new Vector3(x, y, 0f);
-                Debug.Log($"Radnom position = {x} {y} 0");
             }
             target = randomPosition;
+            speed = 4f;
             float step = speed * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, target, step);
             Debug.Log($"Moving towards {randomPosition}");
@@ -96,7 +99,6 @@ public class Peasant : MonoBehaviour
             float x = Random.Range(-100f, 100f);
             float y = Random.Range(-100f, 100f);
             randomPosition = new Vector3(x, y, 0f);
-            Debug.Log($"Radnom position = {x} {y} 0");
         }
         
     }
@@ -109,17 +111,37 @@ public class Peasant : MonoBehaviour
             var delta = target - transform.position;
 
             if (delta.magnitude > 70)
+            {
                 speed = 20f;
+            }
+            else if (delta.magnitude < 5f)
+            {
+                if (Time.time >= nextAttackTime)
+                {
+                    _Animator.SetTrigger("Attacking");
+                    nextAttackTime = Time.time + 1f / attackRate;
+                }
+                    
+            }
+            else if (delta.magnitude < 20)
+            {
+                speed = 3f;
+            }
             else
+            {
                 speed = 5f;
-            float step = speed * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, target, step);
+            }
+            float step = speed * Time.deltaTime; // distance * sign of difference of x
+            Vector3 offset = new Vector3(1f * Mathf.Sign(delta.x),1f * Mathf.Sign(delta.y), 0f);
+            transform.position = Vector3.MoveTowards(transform.position, target - offset, step);
 
-            Vector3 lookPos = target - transform.position;
-            var rotation = Quaternion.LookRotation(lookPos);
+            /*
+            var rotation = Quaternion.LookRotation(target);
             rotation.y = 0;
             rotation.x = 0;
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * damping);
+            */
+            transform.right = target- transform.position;
         }
     }
 
