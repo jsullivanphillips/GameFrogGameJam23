@@ -10,6 +10,7 @@ public class Peasant : MonoBehaviour
     private int hp = 10;
 
     [SerializeField] float speed = 5f;
+    [SerializeField] Animator _Animator;
     private Vector3 target;
     int damping = 2;
 
@@ -22,6 +23,7 @@ public class Peasant : MonoBehaviour
     public void TakeDamage(int amount)
     {
         hp -= amount;
+        _Animator.SetTrigger("IsHit");
         if (hp < 0)
         {
             SpawnManager.Singleton.PeasantHasDied(this.gameObject);
