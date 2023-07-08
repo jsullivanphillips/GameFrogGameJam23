@@ -10,13 +10,19 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] LayerMask enemyLayers;
     [SerializeField] int damage;
     
+    [SerializeField] float attackRate;
+    float nextAttackTime = 0;
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space)) 
+        if(Time.time >= nextAttackTime)
         {
-            Attack();
+            if(Input.GetKeyDown(KeyCode.Space)) 
+            {
+                Attack();
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
         }       
     }
 
