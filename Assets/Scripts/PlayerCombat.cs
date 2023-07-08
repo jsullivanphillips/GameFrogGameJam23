@@ -5,6 +5,12 @@ using UnityEngine;
 public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] Animator anim;
+    [SerializeField] Transform attackPoint;
+    [SerializeField] float attackRange;
+    [SerializeField] LayerMask enemyLayers;
+    [SerializeField] int damage;
+    
+
     // Update is called once per frame
     void Update()
     {
@@ -17,5 +23,19 @@ public class PlayerCombat : MonoBehaviour
     void Attack()
     {
         anim.SetTrigger("attack");
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+        foreach(Collider2D enemy in hitEnemies)
+        {
+            enemy.GetComponent<Peasant>().TakeDamage(damage);
+        }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        if(attackPoint == null)
+            return;
+
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }

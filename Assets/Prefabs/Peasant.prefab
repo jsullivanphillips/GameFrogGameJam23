@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -3409726623913921049}
   - component: {fileID: -1332205448272680893}
   - component: {fileID: 6928117963373744172}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Peasant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7960441172522786830}
   - component: {fileID: 2030781218531251813}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
