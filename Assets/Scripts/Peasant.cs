@@ -13,6 +13,7 @@ public class Peasant : MonoBehaviour
     [SerializeField] Animator _Animator;
     Rigidbody2D rb;
     private Vector3 target;
+    private Vector3 randomPosition;
     int damping = 2;
     private bool canMove = true;
     private int blood = 1;
@@ -55,18 +56,63 @@ public class Peasant : MonoBehaviour
 
     void Update()
     {
-        // make follow only within radiues, otherwise pick random point on map and head to it. need to create groups of peasants.
+        if (IsWerewolfIsClose())
+            LookAndMoveTowardsWerewolf();
+        else
+            MoveRandomDirection();
 
-        LookAndMoveTowardsWerewolf();
+    }
 
+    bool IsWerewolfIsClose()
+    {
+        target = _Werewolf.transform.position;
+        var delta = target - transform.position;
+
+        if (delta.magnitude < 80)
+            return true;
+        else 
+            return false;
+    }
+
+
+    void MoveRandomDirection()
+    {
+        if (randomPosition != transform.position)
+        {
+            if(randomPosition == Vector3.zero)
+            {
+                float x = Random.Range(-100f, 100f);
+                float y = Random.Range(-100f, 100f);
+                randomPosition = new Vector3(x, y, 0f);
+                Debug.Log($"Radnom position = {x} {y} 0");
+            }
+            target = randomPosition;
+            float step = speed * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, target, step);
+            Debug.Log($"Moving towards {randomPosition}");
+        }
+        else
+        {
+            float x = Random.Range(-100f, 100f);
+            float y = Random.Range(-100f, 100f);
+            randomPosition = new Vector3(x, y, 0f);
+            Debug.Log($"Radnom position = {x} {y} 0");
+        }
+        
     }
 
     void LookAndMoveTowardsWerewolf()
     {
         if(canMove)
         {
-            float step = speed * Time.deltaTime;
             target = _Werewolf.transform.position;
+            var delta = target - transform.position;
+
+            if (delta.magnitude > 70)
+                speed = 20f;
+            else
+                speed = 5f;
+            float step = speed * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, target, step);
 
             Vector3 lookPos = target - transform.position;

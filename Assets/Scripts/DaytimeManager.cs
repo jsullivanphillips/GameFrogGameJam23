@@ -17,8 +17,8 @@ public class DaytimeManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        numPeasants = 5;
-        numPeasantsConvincedText.text = "Num Peasants convinced to hunt : 0";
+        numPeasants = 1;
+        numPeasantsConvincedText.text = $"Num Peasants convinced to hunt : {numPeasants}";
 
         bloodText.text = PlayerInfo.Singleton.blood.ToString();
         currentHpText.text = $"Current HP: {PlayerInfo.Singleton.hp}";

@@ -4450,7 +4450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nightTimer: {fileID: 703069276}
-  nightLengthInSeconds: 25
+  nightLengthInSeconds: 160
   nightIsOverParent: {fileID: 2075461355}
 --- !u!4 &1570618073
 Transform:
@@ -4794,11 +4794,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3142561611198845101, guid: e63384f4a2a8d45409d2df245a8b749d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -55.0529
+      value: -127.4
       objectReference: {fileID: 0}
     - target: {fileID: 3142561611198845101, guid: e63384f4a2a8d45409d2df245a8b749d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.4829
+      value: 93
       objectReference: {fileID: 0}
     - target: {fileID: 3142561611198845101, guid: e63384f4a2a8d45409d2df245a8b749d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6633,6 +6633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 1553742231}
   runSpeed: 5
+  sprintSpeed: 10
 --- !u!4 &8369053492875667169
 Transform:
   m_ObjectHideFlags: 0
