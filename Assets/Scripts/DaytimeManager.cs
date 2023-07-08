@@ -7,6 +7,7 @@ using TMPro;
 public class DaytimeManager : MonoBehaviour
 {
     [SerializeField] TMP_Text numPeasantsConvincedText;
+    [SerializeField] TMP_Text numCrossbowsConvincedText;
     [SerializeField] TMP_Text bloodText;
 
     [SerializeField] TMP_Text currentHpText;
@@ -25,12 +26,14 @@ public class DaytimeManager : MonoBehaviour
     int rangeCost = 2;
 
     private int numPeasants;
+    private int numCrossbows;
 
     void Start()
     {
         numPeasants = 1;
+        numCrossbows = 1;
         numPeasantsConvincedText.text = $"Num Peasants convinced to hunt : {numPeasants}";
-
+        numCrossbowsConvincedText.text = $"Num Crossbows convinced to hunt : {numCrossbows}";
         bloodText.text = $"Blood: {PlayerInfo.Singleton.blood.ToString()}";
         currentHpText.text = $"Current HP: {PlayerInfo.Singleton.hp}";
         currentDamageText.text = $"Current damage: {PlayerInfo.Singleton.damage}";
@@ -41,12 +44,15 @@ public class DaytimeManager : MonoBehaviour
     public void OnRaiseUnrest()
     {
         numPeasants += Random.Range(1, 6);
+        numCrossbows += Random.Range(1, 3);
         numPeasantsConvincedText.text = $"Num Peasants convinced to hunt : {Random.Range(Mathf.Max(numPeasants-5, 1),numPeasants)} - {Random.Range(numPeasants, numPeasants + 5)}";
+        numCrossbowsConvincedText.text = $"Num Crossbows convinced to hunt : {Random.Range(Mathf.Max(numCrossbows - 3, 1), numCrossbows)} - {Random.Range(numCrossbows, numCrossbows + 3)}";
     }
 
     public void OnStartNight()
     {
         GameState.Singleton.numPeasantsToSpawn = numPeasants;
+        GameState.Singleton.numCrossbowsToSpawn = numCrossbows;
         SceneLoader.Singleton.LoadScene("Night");
     }
 

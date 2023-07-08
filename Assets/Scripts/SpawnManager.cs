@@ -23,6 +23,13 @@ public class SpawnManager : MonoBehaviour
     private List<GameObject> _InactivePeasantPool = new List<GameObject>();
     private List<GameObject> _ActivePeasantPool = new List<GameObject>();
 
+    [SerializeField] GameObject _CrossbowPrefab;
+    private int _NumCrossbowsToSpawn = 0;
+    private int _NumCrossbowsSpawned = 0;
+    private int _NumAliveCrossbows = 0;
+    private List<GameObject> _InactiveCrossbowPool = new List<GameObject>();
+    private List<GameObject> _ActiveCrossbowPool = new List<GameObject>();
+
 
 
     void Awake()
@@ -38,7 +45,7 @@ public class SpawnManager : MonoBehaviour
         if(GameState.Singleton != null)
         {
             _NumPeasantsToSpawn = GameState.Singleton.numPeasantsToSpawn;
-            Debug.Log($"_NumPeasantsToSpawn = {_NumPeasantsToSpawn}");
+            _NumCrossbowsToSpawn = GameState.Singleton.numCrossbowsToSpawn;
             PopulatePools();
             StartCoroutine(SpawnMobs());
         }
@@ -52,6 +59,20 @@ public class SpawnManager : MonoBehaviour
             peasant.SetActive(false);
             _InactivePeasantPool.Add(peasant);
         }
+        if(_CrossbowPrefab!= null)
+        {
+            for (int i = 0; i < MAXPOOLSIZE; i++)
+            {
+                GameObject crossbow = Instantiate(_CrossbowPrefab, Vector3.zero, Quaternion.identity);
+                crossbow.SetActive(false);
+                _InactiveCrossbowPool.Add(crossbow);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Crossbow Prefab is null!");
+        }
+        
     }
 
     public IEnumerator SpawnMobs()
@@ -67,6 +88,20 @@ public class SpawnManager : MonoBehaviour
             _InactivePeasantPool.Remove(tempList[i]);
             _NumPeasantsSpawned++;
             _NumAlivePeasants++;
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        tempList.Clear();
+        tempList.AddRange(_InactiveCrossbowPool);
+        for (int i = 0; (i < tempList.Count) && (_NumCrossbowsSpawned < _NumCrossbowsToSpawn) && (_NumAliveCrossbows < MAXPOOLSIZE); i++)
+        {
+            tempList[i].SetActive(true);
+            tempList[i].transform.position = RandomSpawnLocation();
+            tempList[i].GetComponent<Crossbow>().SetHp(10);
+            _ActiveCrossbowPool.Add(tempList[i]);
+            _InactiveCrossbowPool.Remove(tempList[i]);
+            _NumCrossbowsSpawned++;
+            _NumAliveCrossbows++;
             yield return new WaitForSeconds(0.5f);
         }
     }
@@ -107,12 +142,28 @@ public class SpawnManager : MonoBehaviour
             StartCoroutine(SpawnMobs());
         }
     }
+    public void CrossbowHasDied(GameObject crossbow)
+    {
+        crossbow.SetActive(false);
+        _ActiveCrossbowPool.Remove(crossbow);
+        _InactiveCrossbowPool.Add(crossbow);
+        _NumAliveCrossbows--;
+        if (_NumCrossbowsSpawned < _NumCrossbowsToSpawn)
+        {
+            StartCoroutine(SpawnMobs());
+        }
+    }
+
 
     public void DespawnAllMobs()
     {
         foreach(GameObject peasant in _ActivePeasantPool)
         {
             peasant.SetActive(false);
+        }
+        foreach (GameObject crossbow in _ActiveCrossbowPool)
+        {
+            crossbow.SetActive(false);
         }
     }
 }

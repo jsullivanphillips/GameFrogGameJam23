@@ -12,6 +12,7 @@ public class GameState : MonoBehaviour
     public event OnGamePaused onGamePaused;
 
     public int numPeasantsToSpawn;
+    public int numCrossbowsToSpawn;
 
 
     void Awake()
