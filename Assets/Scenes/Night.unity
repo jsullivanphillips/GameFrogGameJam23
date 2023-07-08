@@ -1824,7 +1824,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 799172645}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.01, y: 1.22, z: 0}
+  m_LocalPosition: {x: 1.02, y: 0.82, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6121,6 +6121,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e63384f4a2a8d45409d2df245a8b749d, type: 3}
+--- !u!1001 &2097411870
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1295139470752363978, guid: 6fad4aeeff29f104289c393404caafe9, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1464823351458939661, guid: 6fad4aeeff29f104289c393404caafe9, type: 3}
+      propertyPath: m_Name
+      value: Peasant
+      objectReference: {fileID: 0}
+    - target: {fileID: 6309834105091467669, guid: 6fad4aeeff29f104289c393404caafe9, type: 3}
+      propertyPath: m_RootOrder
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6309834105091467669, guid: 6fad4aeeff29f104289c393404caafe9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -19.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6309834105091467669, guid: 6fad4aeeff29f104289c393404caafe9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 6309834105091467669, guid: 6fad4aeeff29f104289c393404caafe9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6309834105091467669, guid: 6fad4aeeff29f104289c393404caafe9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9999621
+      objectReference: {fileID: 0}
+    - target: {fileID: 6309834105091467669, guid: 6fad4aeeff29f104289c393404caafe9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6309834105091467669, guid: 6fad4aeeff29f104289c393404caafe9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6309834105091467669, guid: 6fad4aeeff29f104289c393404caafe9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.008717459
+      objectReference: {fileID: 0}
+    - target: {fileID: 6309834105091467669, guid: 6fad4aeeff29f104289c393404caafe9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6309834105091467669, guid: 6fad4aeeff29f104289c393404caafe9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6309834105091467669, guid: 6fad4aeeff29f104289c393404caafe9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -0.999
+      objectReference: {fileID: 0}
+    - target: {fileID: 8580003185586114794, guid: 6fad4aeeff29f104289c393404caafe9, type: 3}
+      propertyPath: damage
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8580003185586114794, guid: 6fad4aeeff29f104289c393404caafe9, type: 3}
+      propertyPath: _Werewolf
+      value: 
+      objectReference: {fileID: 6033952781329850516}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6fad4aeeff29f104289c393404caafe9, type: 3}
 --- !u!1 &2101570907
 GameObject:
   m_ObjectHideFlags: 0
@@ -6355,7 +6424,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.02142334, y: 0.014282227}
@@ -6533,7 +6602,7 @@ GameObject:
   - component: {fileID: 738694888}
   - component: {fileID: 9118489466084071974}
   - component: {fileID: 9118489466084071975}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Werewolf Mayor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6699,7 +6768,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 9118489466084071975}
   attackPoint: {fileID: 799172646}
-  attackRange: 0.5
+  attackRange: 1.1
   enemyLayers:
     serializedVersion: 2
     m_Bits: 64

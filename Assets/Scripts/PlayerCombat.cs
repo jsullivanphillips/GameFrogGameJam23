@@ -18,10 +18,13 @@ public class PlayerCombat : MonoBehaviour
     {
         if(Time.time >= nextAttackTime)
         {
-            if(Input.GetKeyDown(KeyCode.Space)) 
+            if(!Input.GetKey(KeyCode.LeftShift))
             {
-                Attack();
-                nextAttackTime = Time.time + 1f / attackRate;
+                if(Input.GetButtonDown("Fire1")) 
+                {
+                    Attack();
+                    nextAttackTime = Time.time + 1f / attackRate;
+                }
             }
         }       
     }

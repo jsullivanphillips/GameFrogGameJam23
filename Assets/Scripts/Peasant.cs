@@ -28,6 +28,8 @@ public class Peasant : MonoBehaviour
     [SerializeField] float approachMoveSpeed = 3f;
     [SerializeField] int damage;
     [SerializeField] int hp = 10;
+    [SerializeField] BoxCollider2D boxCollider;
+    [SerializeField] LayerMask player;
 
 
     void Start()
@@ -121,10 +123,18 @@ public class Peasant : MonoBehaviour
     IEnumerator WaitForAttackAnimation()
     {
         yield return new WaitForSeconds(1f);
+        if(boxCollider.IsTouchingLayers(player)){
+            _Werewolf.GetComponent<Werewolf>().TakeDamage(damage);
+        }
         // do attack logic
         // _Werewolf.GetComponent<Werewolf>().TakeDamage(damage);
         // play hooray sound effecT?
         // i.e. AudioManager.Singleton.Play("Hooray");
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        Debug.Log("OnCollisionEnter2D");
     }
 
     void LookAndMoveTowardsWerewolf()
