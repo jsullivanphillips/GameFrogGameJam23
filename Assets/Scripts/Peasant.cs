@@ -15,6 +15,7 @@ public class Peasant : MonoBehaviour
     private Vector3 target;
     int damping = 2;
     private bool canMove = true;
+    private int blood = 1;
 
     void Start()
     {
@@ -30,6 +31,7 @@ public class Peasant : MonoBehaviour
         if (hp < 0)
         {
             SpawnManager.Singleton.PeasantHasDied(this.gameObject);
+            PlayerInfo.Singleton.blood += blood;
         }
         else
         {

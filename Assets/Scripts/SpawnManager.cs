@@ -104,4 +104,12 @@ public class SpawnManager : MonoBehaviour
             StartCoroutine(SpawnMobs());
         }
     }
+
+    public void DespawnAllMobs()
+    {
+        foreach(GameObject peasant in _ActivePeasantPool)
+        {
+            peasant.SetActive(false);
+        }
+    }
 }
