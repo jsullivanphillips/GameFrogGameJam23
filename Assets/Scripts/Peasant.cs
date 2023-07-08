@@ -14,7 +14,6 @@ public class Peasant : MonoBehaviour
     Rigidbody2D rb;
     private Vector3 target;
     private Vector3 randomPosition;
-    int damping = 2;
     private bool canMove = true;
     private int blood = 1;
 
@@ -26,6 +25,7 @@ public class Peasant : MonoBehaviour
         rb = this.gameObject.GetComponent<Rigidbody2D>();
         _Werewolf = GameObject.Find("Werewolf Mayor");
         hp = Random.Range(2, 20);
+        Physics2D.IgnoreCollision(_Werewolf.GetComponent<Collider2D>(), GetComponent<Collider2D>());
     }
 
     public void TakeDamage(int amount)
@@ -110,12 +110,15 @@ public class Peasant : MonoBehaviour
             target = _Werewolf.transform.position;
             var delta = target - transform.position;
 
+            // if sees the werewolf but far away, go crazy fast
             if (delta.magnitude > 70)
             {
                 speed = 20f;
             }
-            else if (delta.magnitude < 5f)
+            // if close, attack
+            else if (delta.magnitude < 4f)
             {
+                speed = 1f;
                 if (Time.time >= nextAttackTime)
                 {
                     _Animator.SetTrigger("Attacking");
@@ -123,24 +126,23 @@ public class Peasant : MonoBehaviour
                 }
                     
             }
+            // if pretty close slowdown
             else if (delta.magnitude < 20)
             {
                 speed = 3f;
             }
+            // else just go a normal pace
             else
             {
                 speed = 5f;
             }
-            float step = speed * Time.deltaTime; // distance * sign of difference of x
-            Vector3 offset = new Vector3(1f * Mathf.Sign(delta.x),1f * Mathf.Sign(delta.y), 0f);
+
+
+            float step = speed * Time.deltaTime; 
+
+            Vector3 offset = new Vector3(1.5f * Mathf.Sign(delta.x),1.5f * Mathf.Sign(delta.y), 0f);
             transform.position = Vector3.MoveTowards(transform.position, target - offset, step);
 
-            /*
-            var rotation = Quaternion.LookRotation(target);
-            rotation.y = 0;
-            rotation.x = 0;
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * damping);
-            */
             transform.right = target- transform.position;
         }
     }

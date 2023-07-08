@@ -20,7 +20,7 @@ public class DaytimeManager : MonoBehaviour
         numPeasants = 1;
         numPeasantsConvincedText.text = $"Num Peasants convinced to hunt : {numPeasants}";
 
-        bloodText.text = PlayerInfo.Singleton.blood.ToString();
+        bloodText.text = $"Blood: {PlayerInfo.Singleton.blood.ToString()}";
         currentHpText.text = $"Current HP: {PlayerInfo.Singleton.hp}";
         currentDamageText.text = $"Current damage: {PlayerInfo.Singleton.damage}";
         currentLifestealText.text = $"Current lifesteal: {PlayerInfo.Singleton.lifesteal}";
