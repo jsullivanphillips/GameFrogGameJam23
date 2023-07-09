@@ -56,6 +56,10 @@ public class PlayerCombat : MonoBehaviour
             {
                 crossbow.TakeDamage(damage);
             }
+            if(enemy.TryGetComponent<Boss>(out Boss boss))
+            {
+                boss.TakeDamage(damage);
+            }
         }
     }
 

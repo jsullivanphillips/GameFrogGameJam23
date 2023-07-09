@@ -146,5 +146,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf92df0b46663534a8df57445f7b8ed2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrowForce: 10
+  arrowForce: 8
   damage: 2
