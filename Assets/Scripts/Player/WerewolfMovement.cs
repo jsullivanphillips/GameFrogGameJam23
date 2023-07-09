@@ -8,6 +8,7 @@ public class WerewolfMovement : MonoBehaviour
     float horizontal;
     float vertical;
     public Camera cam;
+    [SerializeField] Animator _Animator;
 
     [SerializeField] private float runSpeed;
     [SerializeField] private float sprintSpeed;
@@ -30,13 +31,15 @@ public class WerewolfMovement : MonoBehaviour
     {  
         if(Input.GetKey(KeyCode.LeftShift))
         {
+            _Animator.SetBool("Sprinting", true);
             body.velocity = new Vector2(horizontal * sprintSpeed, vertical * sprintSpeed);
         }
         else
         {
+            _Animator.SetBool("Sprinting", false);
             body.velocity = new Vector2(horizontal * runSpeed, vertical * runSpeed);
         }
-
+        
         Vector2 lookDir = mousePos - body.position; 
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
         body.rotation = angle;
