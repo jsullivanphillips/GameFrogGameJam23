@@ -12,7 +12,7 @@ TagManager:
   - Water
   - UI
   - enemies
-  - 
+  - arrow
   - 
   - 
   - 
@@ -40,4 +40,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: arrow
+    uniqueID: 633079367
+    locked: 0
+  - name: bush
+    uniqueID: 544533455
     locked: 0

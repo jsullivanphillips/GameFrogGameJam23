@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Peasant : MonoBehaviour
+public class Crossbow : MonoBehaviour
 {
     private Vector3 _WerewolfLocation;
     private GameObject _Werewolf;
@@ -28,8 +28,10 @@ public class Peasant : MonoBehaviour
     [SerializeField] float approachMoveSpeed = 3f;
     [SerializeField] int damage;
     [SerializeField] int hp = 10;
-    [SerializeField] BoxCollider2D boxCollider;
-    [SerializeField] LayerMask player;
+    [SerializeField] float attackRange;
+    [SerializeField] Transform shootPoint;
+    [SerializeField] GameObject arrowPrefab;
+    [SerializeField] float arrowForce;
 
 
     void Start()
@@ -46,7 +48,7 @@ public class Peasant : MonoBehaviour
         _Animator.SetTrigger("IsHit");
         if (hp < 0)
         {
-            SpawnManager.Singleton.PeasantHasDied(this.gameObject);
+            SpawnManager.Singleton.CrossbowHasDied(this.gameObject);
             PlayerInfo.Singleton.blood += blood;
             NightManager.Singleton.UpdateBloodCount(PlayerInfo.Singleton.blood);
         }
@@ -123,18 +125,18 @@ public class Peasant : MonoBehaviour
     IEnumerator WaitForAttackAnimation()
     {
         yield return new WaitForSeconds(1f);
-        if(boxCollider.IsTouchingLayers(player)){
-            _Werewolf.GetComponent<Werewolf>().TakeDamage(damage);
-        }
+        Shoot();
         // do attack logic
         // _Werewolf.GetComponent<Werewolf>().TakeDamage(damage);
         // play hooray sound effecT?
         // i.e. AudioManager.Singleton.Play("Hooray");
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+     void Shoot()
     {
-        Debug.Log("OnCollisionEnter2D");
+           
+            GameObject arrow = Instantiate(arrowPrefab, shootPoint.position, Quaternion.identity );
+            Destroy(arrow, 5f);
     }
 
     void LookAndMoveTowardsWerewolf()
@@ -150,7 +152,7 @@ public class Peasant : MonoBehaviour
                 speed = 20f;
             }
             // if close, attack
-            else if (delta.magnitude < 4f)
+            else if (delta.magnitude < attackRange)
             {
                 speed = attackMoveSpeed;
                 if (Time.time >= nextAttackTime)

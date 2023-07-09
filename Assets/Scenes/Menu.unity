@@ -376,6 +376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numPeasantsToSpawn: 0
+  numCrossbowsToSpawn: 0
 --- !u!4 &247214909
 Transform:
   m_ObjectHideFlags: 0
@@ -674,7 +675,42 @@ MonoBehaviour:
   - name: Theme
     clip: {fileID: 8300000, guid: 33f0bbde85bb6b64896e81f120762c3d, type: 3}
     isMusic: 1
-    volume: 0.6
+    volume: 0.77
+    pitch: 2.21
+    loop: 0
+    source: {fileID: 0}
+  - name: HitEnemy
+    clip: {fileID: 8300000, guid: 1fb51b981956d7543a9899449b265042, type: 3}
+    isMusic: 0
+    volume: 0.536
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlayerHit
+    clip: {fileID: 8300000, guid: 226f421b96c8a43a7b0fd874ee07593d, type: 3}
+    isMusic: 0
+    volume: 0.616
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: StartGame
+    clip: {fileID: 8300000, guid: 32255d0cf8ddc40d3a6a600ea9637d97, type: 3}
+    isMusic: 0
+    volume: 0.657
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Walking
+    clip: {fileID: 8300000, guid: 17ef6390869c5de449962cc2c87e5a7f, type: 3}
+    isMusic: 0
+    volume: 0.657
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Dead
+    clip: {fileID: 8300000, guid: e72e3beee6bd0c14dba269c46bba5c0e, type: 3}
+    isMusic: 0
+    volume: 0.657
     pitch: 1
     loop: 0
     source: {fileID: 0}

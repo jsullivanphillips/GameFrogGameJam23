@@ -9,13 +9,13 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] float attackRange;
     [SerializeField] LayerMask enemyLayers;
     [SerializeField] int damage;
-    
     [SerializeField] float attackRate;
     float nextAttackTime = 0;
 
     // Update is called once per frame
     void Update()
     {
+
         if(Time.time >= nextAttackTime)
         {
             if(!Input.GetKey(KeyCode.LeftShift))
@@ -46,7 +46,16 @@ public class PlayerCombat : MonoBehaviour
 
         foreach(Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Peasant>().TakeDamage(damage);
+            AudioManager.Singleton.Play("HitEnemy");
+            
+            if(enemy.TryGetComponent<Peasant>(out Peasant peasent))
+            {
+                peasent.TakeDamage(damage);
+            }
+            if(enemy.TryGetComponent<Crossbow>(out Crossbow crossbow))
+            {
+                crossbow.TakeDamage(damage);
+            }
         }
     }
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Crossbow : MonoBehaviour
+public class Peasant : MonoBehaviour
 {
     private Vector3 _WerewolfLocation;
     private GameObject _Werewolf;
@@ -30,6 +30,7 @@ public class Crossbow : MonoBehaviour
     [SerializeField] int hp = 10;
     [SerializeField] BoxCollider2D boxCollider;
     [SerializeField] LayerMask player;
+   
 
 
     void Start()
@@ -46,7 +47,7 @@ public class Crossbow : MonoBehaviour
         _Animator.SetTrigger("IsHit");
         if (hp < 0)
         {
-            SpawnManager.Singleton.CrossbowHasDied(this.gameObject);
+            SpawnManager.Singleton.PeasantHasDied(this.gameObject);
             PlayerInfo.Singleton.blood += blood;
             NightManager.Singleton.UpdateBloodCount(PlayerInfo.Singleton.blood);
         }
@@ -126,16 +127,13 @@ public class Crossbow : MonoBehaviour
         if(boxCollider.IsTouchingLayers(player)){
             _Werewolf.GetComponent<Werewolf>().TakeDamage(damage);
         }
+        
         // do attack logic
         // _Werewolf.GetComponent<Werewolf>().TakeDamage(damage);
         // play hooray sound effecT?
         // i.e. AudioManager.Singleton.Play("Hooray");
     }
 
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        Debug.Log("OnCollisionEnter2D");
-    }
 
     void LookAndMoveTowardsWerewolf()
     {

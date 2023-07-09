@@ -7,6 +7,7 @@ public class MenuManager : MonoBehaviour
 
     public void OnStartGame()
     {
+        AudioManager.Singleton.Play("StartGame");
         SceneLoader.Singleton.LoadScene("Day");
     }
 
